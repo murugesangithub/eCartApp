@@ -1,3 +1,4 @@
+import 'package:ecartapp/assets/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -11,26 +12,36 @@ void fieldFocusChange(
   FocusScope.of(context).requestFocus(nextFocus);
 }
 
-Map<int, Color> _primaryColorLight = {
-  50: Color.fromRGBO(0, 142, 142, .1),
-  100: Color.fromRGBO(0, 142, 142, .2),
-  200: Color.fromRGBO(0, 142, 142, .3),
-  300: Color.fromRGBO(0, 142, 142, .4),
-  400: Color.fromRGBO(0, 142, 142, .5),
-  500: Color.fromRGBO(0, 142, 142, .6),
-  600: Color.fromRGBO(0, 142, 142, .7),
-  700: Color.fromRGBO(0, 142, 142, .8),
-  800: Color.fromRGBO(0, 142, 142, .9),
-  900: Color.fromRGBO(0, 142, 142, 1),
-};
-MaterialColor primaryColorLightCustom =
-    MaterialColor(0xFF008E8E, _primaryColorLight);
+// Map<int, Color> _primaryColorLight = {
+//   50: Color.fromRGBO(0, 142, 142, .1),
+//   100: Color.fromRGBO(0, 142, 142, .2),
+//   200: Color.fromRGBO(0, 142, 142, .3),
+//   300: Color.fromRGBO(0, 142, 142, .4),
+//   400: Color.fromRGBO(0, 142, 142, .5),
+//   500: Color.fromRGBO(0, 142, 142, .6),
+//   600: Color.fromRGBO(0, 142, 142, .7),
+//   700: Color.fromRGBO(0, 142, 142, .8),
+//   800: Color.fromRGBO(0, 142, 142, .9),
+//   900: Color.fromRGBO(0, 142, 142, 1),
+// };
+// MaterialColor primaryColorLightCustom =
+//     MaterialColor(0xFF008E8E, _primaryColorLight);
 final borderColor = const Color(0xFF18acad);
 final barColour = const Color(0xFF008c8d);
-TextStyle _formTextStyle =
-    TextStyle(fontWeight: FontWeight.w400, fontSize: 12.0);
+TextStyle _formTextStyle = TextStyle(
+  fontWeight: FontWeight.w400,
+  fontSize: 12.0,
+);
+final bgColour = const Color(0xFFb8c5ce);
 BoxDecoration _fieldDecoration = BoxDecoration(
+  //color: Colors.white,
   borderRadius: BorderRadius.circular(4.0),
+  // boxShadow: [
+  //   BoxShadow(
+  //       color: Color.fromRGBO(255, 255, 255, 0.9),
+  //       blurRadius: 5,
+  //       offset: Offset(0, 1))
+  // ],
   border: Border.all(
     color: primaryColorLightCustom,
     width: 0.3,
@@ -41,9 +52,7 @@ FocusNode _passwordFocusNode = FocusNode();
 
 class _LoginState extends State<Login> {
   int counter = 1;
-  // final barColour = const Color(0xFF99AAAB);
-  final bgColour = const Color(0xFFb8c5ce);
-  // final borderColor = const Color(0xFF18acad);
+
   Widget build(context) {
     return MaterialApp(
       home: Scaffold(
@@ -53,11 +62,16 @@ class _LoginState extends State<Login> {
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 1,
               decoration: BoxDecoration(
-                color: bgColour,
+                image: DecorationImage(
+                    image: AssetImage('lib/assets/images/ecart_bg.jpg'),
+                    fit: BoxFit.fill,
+                    colorFilter: ColorFilter.mode(
+                        bgColour.withOpacity(0.5), BlendMode.darken)),
+                //color: bgColour,
               ),
               child: Column(children: <Widget>[
                 SizedBox(
-                  height: 80,
+                  height: 150,
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.95,
@@ -65,9 +79,8 @@ class _LoginState extends State<Login> {
                   margin: EdgeInsets.all(15),
                   padding: EdgeInsets.all(15.0),
                   decoration: BoxDecoration(
-                    // border: Border(
-                    //     top: BorderSide(width: 7.0, color: Color(0xFFb3c2c2))),
                     color: Colors.white,
+                    borderRadius: BorderRadius.circular(25),
                     // borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   child: Column(
@@ -113,6 +126,7 @@ class _LoginState extends State<Login> {
                             labelText: 'Email',
                             labelStyle: _formTextStyle,
                             border: InputBorder.none,
+
                             suffixIcon: Icon(
                               Icons.person,
                               color: barColour,
